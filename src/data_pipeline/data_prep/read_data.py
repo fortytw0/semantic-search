@@ -15,7 +15,7 @@ reddit_df.printSchema()
 
 reddit_df = reddit_df.dropDuplicates(['id'])
 
-reddit_df.head(10)
+print(reddit_df.head(10))
 
 print("Process took : {} seconds".format(time.time() - start_time))
 
