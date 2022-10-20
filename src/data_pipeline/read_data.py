@@ -9,7 +9,7 @@ spark = SparkSession \
 
 start_time = time.time()
 
-reddit_df = spark.read.option("multiline" , "true").json("data/RC_2022-06")
+reddit_df = spark.read.json("data/RC_2022-06.jsonl")
 
 reddit_df.printSchema()
 
