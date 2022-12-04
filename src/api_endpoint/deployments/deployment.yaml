@@ -13,6 +13,15 @@ spec:
       labels:
         app: api-endpoint
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - alpha
       restartPolicy: Always
       containers:
       - name: api-endpoint
