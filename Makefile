@@ -21,3 +21,6 @@ retire_api_endpoint:
 
 # kubectl describe pvc api-endpoint-pvc 
 # kubectl describe pv api-endpoint-pv
+
+# kubectl exec -it pod/ 
+# -- /bin/bash
