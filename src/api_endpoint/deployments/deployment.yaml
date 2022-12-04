@@ -15,7 +15,7 @@ spec:
     spec:
       restartPolicy: Always
       containers:
-      - name: api_endpoint
+      - name: api-endpoint
         image: fortytw0/api_endpoint:latest
         ports:
         - containerPort: 8000
