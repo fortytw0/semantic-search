@@ -1,28 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-server
+  name: api_endpoint
   labels:
-    app: flask-server
+    app: api_endpoint
 spec:
   selector:
     matchLabels:
-      app: flask-server
+      app: api_endpoint
   template:
     metadata:
       labels:
-        app: flask-server
+        app: api_endpoint
     spec:
       restartPolicy: Always
       containers:
-      - name: flask-server
-        image: fortytw0/flask-server:latest
+      - name: api_endpoint
+        image: fortytw0/api_endpoint:latest
         ports:
         - containerPort: 8000
-        # command: ["sleep"]
-        # args : ["infinity"]
         command: ["/bin/bash" , "-c"]
-        args : ["python3 /app/rest-server.py"]
+        args : ["python3 /api_endpoint/manage.py runserver 0.0.0.0:80"]
         volumeMounts:
           - mountPath: /app/
             name: config

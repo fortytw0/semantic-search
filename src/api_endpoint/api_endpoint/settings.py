@@ -10,13 +10,16 @@ from django.core.management.utils import get_random_secret_key
 SECRET_KEY = get_random_secret_key()
 print(get_random_secret_key())
 
-# 'django-insecure-3um%mv%fvpw@xa9qd!aw$ivp2fnzh48+7^mk)e+er#jfab7q&p'
+DEBUG = os.environ.get('DEBUG', '1')=='1'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+ALLOWED_HOSTS = ['localhost', 'backend']
+ALLOWED_HOSTS_ENV = os.environ.get('ALLOWED_HOSTS')
 
-ALLOWED_HOSTS = ['localhost' , 'backend']
+if ALLOWED_HOSTS_ENV:
+    ALLOWED_HOSTS.extend(ALLOWED_HOSTS_ENV.split(','))
 
+print('Allowed Hosts : ')
+print(ALLOWED_HOSTS)
 
 # Application definition
 
@@ -28,23 +31,26 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework' ,
+    'corsheaders',
     'search' , 
     'djoser',
     'rest_framework.authtoken',
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8000',
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
     'https://localhost:3000',
-    'http://134.209.151.243:8000',
-    'https://134.209.151.243:8000',
-    'http://frontend:8080',
-    'https://frontend:8080',
-    'http://postrboi.com',
-    'https://postrboi.com',
-)
+] 
+
+for allowed_host in ALLOWED_HOSTS : 
+    CORS_ORIGIN_WHITELIST.append('http://{}:3000'.format(allowed_host.split(':')[0]))
+    CORS_ORIGIN_WHITELIST.append('https://{}:3000'.format(allowed_host.split(':')[0]))
+
+print('Current CORS_ORIGING_WHITELIST : ')
+print(CORS_ORIGIN_WHITELIST)
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,7 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+]    
 
 ROOT_URLCONF = 'api_endpoint.urls'
 
