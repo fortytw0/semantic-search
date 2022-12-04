@@ -12,6 +12,7 @@ deploy_api_endpoint:
 	kubectl apply -f src/api_endpoint/deployments/service.yaml
 
 retire_api_endpoint: 
+	kubectl delete storageclass local-storage
 	kubectl delete pvc api-endpoint-pvc
 	kubectl delete pv api-endpoint-pv
 	kubectl delete deployment.apps/api-endpoint 
