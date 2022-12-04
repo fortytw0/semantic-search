@@ -15,7 +15,7 @@ from rest_framework import authentication, permissions
 
 class RedditV1(views.APIView) : 
 
-    authentication_classes = [authentication.TokenAuthentication]
+    # authentication_classes = [authentication.TokenAuthentication]
 
     def post(self, request) : 
         

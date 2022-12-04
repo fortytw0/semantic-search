@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Delete
   storageClassName: local-storage
   local:
-    path: /home/ubuntu/semantic-search
+    path: "/home/ubuntu/semantic-search/src/api_endpoint"
   nodeAffinity:
     required:
       nodeSelectorTerms:

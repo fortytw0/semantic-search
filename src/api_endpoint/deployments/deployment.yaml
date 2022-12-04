@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api_endpoint
+  name: api-endpoint
   labels:
-    app: api_endpoint
+    app: api-endpoint
 spec:
   selector:
     matchLabels:
-      app: api_endpoint
+      app: api-endpoint
   template:
     metadata:
       labels:
-        app: api_endpoint
+        app: api-endpoint
     spec:
       restartPolicy: Always
       containers:
@@ -20,16 +20,17 @@ spec:
         ports:
         - containerPort: 8000
         command: ["/bin/bash" , "-c"]
-        args : ["python3 /api_endpoint/manage.py runserver 0.0.0.0:80"]
+        args : ["python3 /api_endpoint/manage.py runserver 0.0.0.0:8000"]
         volumeMounts:
-          - mountPath: /app/
-            name: config
-          - mountPath: /cache/
-            name: cache
+          - mountPath: /api_endpoint
+            name: api-endpoint-vol
+        env:
+        - name: ALLOWED_HOSTS
+          value: "172.26.147.249"
+        - name: DEBUG
+          value: "1"
+          
       volumes:
-        - name: config
-          configMap:
-            name: config
-        - name: cache
-          emptyDir:
-            sizeLimit: 500Mi
+        - name: api-endpoint-vol
+          persistentVolumeClaim:
+            claimName: api-endpoint-pv

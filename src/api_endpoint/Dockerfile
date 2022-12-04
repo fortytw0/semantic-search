@@ -10,10 +10,10 @@ COPY requirements.txt /requirements.txt
 
 RUN pip install --no-cache -r /requirements.txt && \
     useradd -s /bin/bash user && \
-    mkdir /app
+    mkdir /api_endpoint
 
 USER user
 
-WORKDIR /app
+WORKDIR /api_endpoint
 
 CMD ["/bin/bash"]
