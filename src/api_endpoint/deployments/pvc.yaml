@@ -4,9 +4,6 @@ metadata:
   name: api-endpoint-pvc
 spec:
   volumeMode: Filesystem
-  claimRef:
-     namespace: default
-     name: api-endpoint-pvc
   accessModes:
     - ReadWriteOnce
   storageClassName: local-storage
