@@ -33,4 +33,4 @@ spec:
       volumes:
         - name: api-endpoint-vol
           persistentVolumeClaim:
-            claimName: api-endpoint-pv
+            claimName: api-endpoint-pvc
