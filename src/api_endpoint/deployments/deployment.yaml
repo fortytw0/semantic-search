@@ -36,7 +36,7 @@ spec:
             name: api-endpoint-vol
         env:
         - name: ALLOWED_HOSTS
-          value: "172.26.147.249"
+          value: "198.59.83.28"
         - name: DEBUG
           value: "1"
           

@@ -21,6 +21,8 @@ if ALLOWED_HOSTS_ENV:
 print('Allowed Hosts : ')
 print(ALLOWED_HOSTS)
 
+ALLOWED_HOSTS = ['*']
+
 # Application definition
 
 INSTALLED_APPS = [
