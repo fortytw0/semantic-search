@@ -6,7 +6,7 @@ RUN apt-get update && apt-get upgrade -y && \
                         libffi-dev libssl-dev musl-dev && \
     pip install --upgrade pip
 
-COPY docker/api_requirements.txt /requirements.txt
+COPY docker/requirements.txt /requirements.txt
 
 RUN pip install --no-cache -r /requirements.txt && \
     useradd -s /bin/bash user && \

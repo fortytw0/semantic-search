@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-server
+  labels:
+    app: flask-server
+spec:
+  selector:
+    matchLabels:
+      app: flask-server
+  template:
+    metadata:
+      labels:
+        app: flask-server
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: flask-server
+        image: fortytw0/flask-server:latest
+        ports:
+        - containerPort: 8000
+        # command: ["sleep"]
+        # args : ["infinity"]
+        command: ["/bin/bash" , "-c"]
+        args : ["python3 /app/rest-server.py"]
+        volumeMounts:
+          - mountPath: /app/
+            name: config
+          - mountPath: /cache/
+            name: cache
+      volumes:
+        - name: config
+          configMap:
+            name: config
+        - name: cache
+          emptyDir:
+            sizeLimit: 500Mi
