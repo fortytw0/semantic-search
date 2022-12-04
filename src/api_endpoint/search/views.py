@@ -8,7 +8,10 @@ from .serializers import RedditV1Serializer
 from rest_framework import serializers, views, response
 from rest_framework import authentication, permissions
 
+class HelloWorld(views.APIView) : 
 
+    def get(self, request) : 
+        return response.Response({'message' : 'Hello World!'})
 
 
 # Create your views here.
