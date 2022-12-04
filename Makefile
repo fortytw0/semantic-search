@@ -19,4 +19,5 @@ retire_api_endpoint:
 	kubectl delete service/api-endpoint-service 
 
 
-# kubectl get pvc api-endpoint-pvc 
+# kubectl describe pvc api-endpoint-pvc 
+# kubectl describe pv api-endpoint-pv

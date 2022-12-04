@@ -7,7 +7,6 @@ spec:
     storage: 10Gi
   accessModes:
   - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
   hostPath:
     path: "/home/ubuntu/semantic-search/src/api_endpoint"
   # storageClassName: local-storage
