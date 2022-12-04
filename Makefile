@@ -10,3 +10,9 @@ deploy_api_endpoint:
 	kubectl apply -f src/api_endpoint/deployments/pvc.yaml 
 	kubectl apply -f src/api_endpoint/deployments/deployment.yaml
 	kubectl apply -f src/api_endpoint/deployments/service.yaml
+
+retire_api_endpoint: 
+	kubectl delete pvc api-endpoint-pvc
+	kubectl delete pv api-endpoint-pv
+	kubectl delete deployment.apps/api-endpoint 
+	kubectl delete service/api-endpoint-service 
