@@ -12,11 +12,11 @@ spec:
   # storageClassName: local-storage
   # local:
   #   path: /home/ubuntu/semantic-search/src/api_endpoint
-  # nodeAffinity:
-  #   required:
-  #     nodeSelectorTerms:
-  #     - matchExpressions:
-  #       - key: kubernetes.io/hostname
-  #         operator: In
-  #         values:
-  #         - alpha
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - alpha
