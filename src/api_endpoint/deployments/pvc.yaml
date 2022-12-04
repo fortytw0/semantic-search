@@ -2,6 +2,8 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: api-endpoint-pvc
+  finalizers:
+    - "null"
 spec:
   accessModes:
   - ReadWriteOnce
