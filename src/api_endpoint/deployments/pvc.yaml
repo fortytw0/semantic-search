@@ -5,8 +5,8 @@ metadata:
 spec:
   volumeMode: Filesystem
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteMany
   storageClassName: local-storage
   resources:
     requests:
-      storage: 10Gi
+      storage: 9Gi
