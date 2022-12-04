@@ -8,14 +8,16 @@ spec:
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: local-storage
-  local:
+  hostPath:
     path: /home/ubuntu/semantic-search/src/api_endpoint
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - alpha
+  # storageClassName: local-storage
+  # local:
+  #   path: /home/ubuntu/semantic-search/src/api_endpoint
+  # nodeAffinity:
+  #   required:
+  #     nodeSelectorTerms:
+  #     - matchExpressions:
+  #       - key: kubernetes.io/hostname
+  #         operator: In
+  #         values:
+  #         - alpha
