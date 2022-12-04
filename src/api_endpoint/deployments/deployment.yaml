@@ -13,8 +13,7 @@ spec:
       labels:
         app: api-endpoint
     spec:
-      nodeSelector:
-        nodeName: alpha
+      nodeName: alpha
       restartPolicy: Always
       containers:
       - name: api-endpoint
