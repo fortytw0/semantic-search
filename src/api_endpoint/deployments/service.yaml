@@ -5,10 +5,9 @@ metadata:
 spec:
   selector:
     app: api-endpoint
-  type: NodePort
+  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 8000
       targetPort: 80
-      nodePort: 30008
   
