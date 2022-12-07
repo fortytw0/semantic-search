@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  rest: 
+    build: 
+      context: ./src/api_endpoint/docker
+      dockerfile: Dockerfile
+    image: fortytw0/api_endpoint:latest
+    ports:
+      - 80:8000
+    volumes:
+      - ./src/api_endpoint:/api_endpoint 
+  redis:
+    image: redis
+    
+
+
+    
+    
+
