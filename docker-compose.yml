@@ -10,7 +10,7 @@ services:
     volumes:
       - ./src/api_endpoint:/api_endpoint 
 
-    command: ["sleep infinity"]
+    command: ["tail", "-f", "/dev/null"]
     
   redis:
     image: redis
