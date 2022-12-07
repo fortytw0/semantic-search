@@ -64,3 +64,16 @@ class RedditV1(views.APIView) :
 
         else : 
             return response.Response(search_serialzier.errors)
+
+
+class ListView(views.APIView) : 
+
+    authentication_classes = [authentication.TokenAuthentication]
+
+    def get(self, request) :
+
+        jobs = Job.objects.get(user=request.user)
+        print(jobs)
+
+        return response.Response('success!')
+
