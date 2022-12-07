@@ -6,8 +6,8 @@ class Job(models.Model) :
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job_name = models.CharField(max_length=64 , unique=True, blank=False)
-    search_string = models.CharField(blank=False)
-    filter_keywords = models.CharField()
-    subreddits = models.CharField(blank=False)
+    search_string = models.CharField(max_length=64 , blank=False)
+    filter_keywords = models.CharField(max_length=512)
+    subreddits = models.CharField(max_length=512, blank=False)
     description = models.TextField()
     time_submitted = models.DateTimeField(auto_now_add=True)
