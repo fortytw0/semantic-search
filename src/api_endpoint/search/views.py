@@ -30,7 +30,10 @@ class RedditV1(views.APIView) :
     def post(self, request) : 
         
         search_serialzier = RedditV1Serializer(data=request.data)
+        print('request.data : ' , request.data)
         print("Search Serializer Validity : " ,  search_serialzier.is_valid())
+
+        print(search_serialzier.errors)
 
         if search_serialzier.is_valid() : 
             
@@ -50,4 +53,8 @@ class RedditV1(views.APIView) :
             redis_client.lpush('queued' , search_job_name)
             redis_client.hset(search_job_name, json.dumps(serializer_data))
                 
-        return response.Response(search_serialzier.data)
+            return response.Response(search_serialzier.data)
+
+        else : 
+
+            return response.Response(search_serialzier.errors)
