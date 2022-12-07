@@ -78,6 +78,10 @@ print(response.json())
 search_string = 'I think Messi is way better than Ronaldo'
 subreddits = 'soccer,nfl'
 filter_keywords = 'messi,ronaldo'
-description = ''
+description = 'I have an incredibly parochial view on soccer'
 
-reddit_search(token , search_string, subreddits , filter_keywords , description)
+response = reddit_search(token , search_string, subreddits , filter_keywords , description)
+
+print(response.content)
+print(response.status_code)
+print(response.json())

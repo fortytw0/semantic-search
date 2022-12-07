@@ -60,8 +60,7 @@ class RedditV1(views.APIView) :
             print(type(json.dumps(serializer_data)))
             redis_client.set(search_job_name, json.dumps(serializer_data))
                 
-            return response.Response(search_serialzier.data)
+            return response.Response({'status':'success','job_name' : search_job_name})
 
         else : 
-
             return response.Response(search_serialzier.errors)
