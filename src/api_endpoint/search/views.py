@@ -72,7 +72,7 @@ class ListJobs(views.APIView) :
 
     def get(self, request) :
 
-        jobs = Job.objects.get_queryset(user=request.user)
+        jobs = Job.objects.filter(user=request.user)
         print(jobs)
 
         return response.Response('success!')
