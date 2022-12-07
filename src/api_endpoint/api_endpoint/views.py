@@ -1,4 +1,4 @@
 from django.http import HttpResponse
 
-def hello(request, question_id):
-    return HttpResponse("hello world!")
+def hello(request):
+    return HttpResponse("Welcome to Reddit Semantic Search!")
