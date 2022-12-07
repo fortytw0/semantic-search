@@ -66,7 +66,7 @@ class RedditV1(views.APIView) :
             return response.Response(search_serialzier.errors)
 
 
-class ListView(views.APIView) : 
+class ListJobs(views.APIView) : 
 
     authentication_classes = [authentication.TokenAuthentication]
 
