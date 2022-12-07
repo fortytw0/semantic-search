@@ -1,4 +1,4 @@
-FROM python:3.10-buster
+FROM python:3.8-buster
 
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y  apt-utils python3-dev python3-setuptools \
