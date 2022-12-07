@@ -49,7 +49,11 @@ def reddit_search(token , search_string, subreddits , filter_keywords , descript
 
     return requests.post(parse.urljoin(URL , endpoint) , json=data, headers={'Authorization' : 'Token {}'.format(token)})
 
+def list_my_jobs(token) : 
 
+    endpoint = 'search/reddit/v1/list_jobs'
+
+    return requests.get(parse.urljoin(URL , endpoint) , headers={'Authorization' : 'Token {}'.format(token)})
 
 
 username = 'helloworld'
@@ -85,3 +89,8 @@ response = reddit_search(token , search_string, subreddits , filter_keywords , d
 print(response.content)
 print(response.status_code)
 print(response.json())
+
+response = list_my_jobs(token)
+
+print(response.content)
+print(response.status_code)
