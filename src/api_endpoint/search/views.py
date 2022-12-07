@@ -38,7 +38,7 @@ class RedditV1(views.APIView) :
         if search_serialzier.is_valid() : 
             
             print('Search Serializer has been validated...')
-            print('Current User is :' , request.user.name)
+            print('Current User is :' , request.user)
 
             serializer_data = search_serialzier.data
             search_job_name = ''.join(random.choices(string.ascii_lowercase , k=50))
@@ -50,8 +50,15 @@ class RedditV1(views.APIView) :
             job = Job(user=request.user , **serializer_data)
             job.save()
             
+
+            print('pushing job name to queue : ')
             redis_client.lpush('queued' , search_job_name)
-            redis_client.hset(search_job_name, json.dumps(serializer_data))
+            print('finished pushing job name to queue')
+            
+            print('setting hset')
+            print(json.dumps(serializer_data))
+            print(type(json.dumps(serializer_data)))
+            redis_client.set(search_job_name, json.dumps(serializer_data))
                 
             return response.Response(search_serialzier.data)
 
