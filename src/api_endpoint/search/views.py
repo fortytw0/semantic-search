@@ -58,7 +58,7 @@ class RedditV1(views.APIView) :
             print('setting hset')
             print(json.dumps(serializer_data))
             print(type(json.dumps(serializer_data)))
-            redis_client.set(search_job_name, json.dumps(serializer_data))
+            redis_client.hset('queued_job_details' , search_job_name, json.dumps(serializer_data))
                 
             return response.Response({'status':'success','job_name' : search_job_name})
 

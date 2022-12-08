@@ -56,14 +56,14 @@ def list_my_jobs(token) :
     return requests.get(parse.urljoin(URL , endpoint) , headers={'Authorization' : 'Token {}'.format(token)})
 
 
-username = 'helloworld'
+username = 'zhiyong'
 password = 'kaka1234'
-email = 'hello@123.com'
+email = 'zw@123.com'
 
-# response = create_account(username, password, email)
+response = create_account(username, password, email)
 
-# print(response.content)
-# print(response.status_code)
+print(response.content)
+print(response.status_code)
 
 response = login(username, password)
 
