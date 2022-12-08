@@ -11,3 +11,6 @@ class Job(models.Model) :
     subreddits = models.CharField(max_length=512, blank=False)
     description = models.TextField()
     time_submitted = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.search_string

@@ -56,14 +56,14 @@ def list_my_jobs(token) :
     return requests.get(parse.urljoin(URL , endpoint) , headers={'Authorization' : 'Token {}'.format(token)})
 
 
-username = 'zhiyong'
+username = 'lala'
 password = 'kaka1234'
 email = 'zw@123.com'
 
-response = create_account(username, password, email)
+# response = create_account(username, password, email)
 
-print(response.content)
-print(response.status_code)
+# print(response.content)
+# print(response.status_code)
 
 response = login(username, password)
 
@@ -81,7 +81,7 @@ print(response.json())
 
 search_string = 'I think Messi is way better than Ronaldo'
 subreddits = 'soccer,nfl'
-filter_keywords = 'messi,ronaldo'
+filter_keywords = 'messi'
 description = 'I have an incredibly parochial view on soccer'
 
 response = reddit_search(token , search_string, subreddits , filter_keywords , description)

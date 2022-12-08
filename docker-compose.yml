@@ -14,6 +14,30 @@ services:
   redis:
     image: redis
 
+  searcher: 
+    build: 
+      context: ./src/search/docker
+      dockerfile: Dockerfile
+
+    volumes:
+      - ./src/search:/search
+      - ./data/embeddings:/search/embeddings
+      - ./data/permalinks:/search/permalinks
+
+    command: ["tail", "-f", "/dev/null"]
+
+  # data-processing:
+  #   build: 
+  #     context: ./src/data_processing/docker
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./src/data_processing:/job
+  #     - ./data:/job/data
+    
+  #   entrypoint: ["--executor-memory 4G --driver-memory 4G --executor-cores 4 filter.py"]
+
+  
+
 
     
 
