@@ -8,8 +8,7 @@ services:
       - 80:8000
     volumes:
       - ./src/api_endpoint:/api_endpoint 
-
-    command: ["tail", "-f", "/dev/null"]
+    command: ["/bin/bash" , "-c" , "docker/startup.sh"]
     
   redis:
     image: redis
