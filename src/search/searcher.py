@@ -22,33 +22,33 @@ while True :
     if job_name is not None : 
         job_name = job_name.decode('utf-8')
 
-    redis_client.set(job_name , 'searching')
-    search_params = json.loads(redis_client.hget('filtered_job_details' , job_name))
+        redis_client.set(job_name , 'searching')
+        search_params = json.loads(redis_client.hget('filtered_job_details' , job_name))
 
-    search_string = search_params['search_string']
-    permalinks_to_search = search_params['permalinks']
+        search_string = search_params['search_string']
+        permalinks_to_search = search_params['permalinks']
 
-    target_embeddings = embeddings[[permalinks.index(pl) for pl in permalinks_to_search]]
-    query_embedding = model.encode(search_string)
+        target_embeddings = embeddings[[permalinks.index(pl) for pl in permalinks_to_search]]
+        query_embedding = model.encode(search_string)
 
-    batch_size = 5000
-    cosine_similarity = [] 
+        batch_size = 5000
+        cosine_similarity = [] 
 
-    for i in range(0, query_embedding.shape[0] , batch_size):
-        if query_embedding.shape[0] - i < batch_size:
-            start = i 
-            end = abs(i-query_embedding.shape[0]) + i 
-        else:
-            start = i 
-            end = i + batch_size
+        for i in range(0, query_embedding.shape[0] , batch_size):
+            if query_embedding.shape[0] - i < batch_size:
+                start = i 
+                end = abs(i-query_embedding.shape[0]) + i 
+            else:
+                start = i 
+                end = i + batch_size
 
-            cosine_similarity += util.cos_sim(query_embedding , target_embeddings[start:end , :])[0]
-            
-    cosine_similarity = sorted(list(zip(permalinks_to_search , cosine_similarity)) , key=lambda x : x[1] , reverse=True)
+                cosine_similarity += util.cos_sim(query_embedding , target_embeddings[start:end , :])[0]
 
-    redis_client.lpush('searched', job_name)
-    redis_client.set(job_name , 'searched')
-    redis_client.hset('searched_job_details' , job_name , json.dumps(cosine_similarity))
+        cosine_similarity = sorted(list(zip(permalinks_to_search , cosine_similarity)) , key=lambda x : x[1] , reverse=True)
+
+        redis_client.lpush('searched', job_name)
+        redis_client.set(job_name , 'searched')
+        redis_client.hset('searched_job_details' , job_name , json.dumps(cosine_similarity))
 
     time.sleep(10)
 
