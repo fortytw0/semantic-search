@@ -82,7 +82,7 @@ while True :
             filter_keywords = search_params['filter_keywords'].split(',')
 
             processed_df = filter_on_keywords(filter_keywords)
-            processed_df = filter_on_subreddit(subreddits)
+            processed_df = filter_on_subreddit(processed_df , subreddits)
 
             permalinks = list(processed_df.select('permalink').toPandas()['permalink'])
 
