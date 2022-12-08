@@ -33,7 +33,7 @@ services:
       - ./src/data_processing:/job
       - ./data:/job/data
     
-    command: ["--executor-memory 4G --driver-memory 4G --executor-cores 4 filter.py"]
+    command: ["--executor-memory 4G" , "--driver-memory 4G" , "--executor-cores 4" , "filter.py"]
 
   
 
