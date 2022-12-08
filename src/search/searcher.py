@@ -14,7 +14,12 @@ model = SentenceTransformer('all-mpnet-base-v2')
 embeddings = torch.tensor(np.load('./embeddings/RC_2022-06.npy'))
 
 with open('./permalinks/RC_2022-06_permalink', 'r') as f:
-    permalinks = f.readlines()[0].replace('[', '').replace(']', '').split(',')
+    permalinks = f.readlines()[0].replace('[', '').replace(']', '').replace('"' , '').split(',')
+    
+
+permalinks = [pl.strip() for pl in permalinks]
+
+print('permalinks:' , permalinks)
 
 while True : 
 
