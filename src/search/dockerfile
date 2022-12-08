@@ -1,0 +1,22 @@
+FROM pytorch/pytorch:1.8.1-cuda11.0-cudnn8-runtime
+
+RUN apt-get update && apt-get install -y \
+    wget
+
+# Install Pandas and NumPy
+RUN pip install pandas numpy logging
+
+# Install sentence-transformers
+RUN pip install sentence-transformers
+
+# Install redis
+RUN pip install redis
+
+# Copy the code to the container
+COPY . /app
+
+# Set the working directory
+WORKDIR /app
+
+# Run the code
+CMD ["python", "computing_worker.py"]
