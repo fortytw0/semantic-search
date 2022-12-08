@@ -3,8 +3,8 @@ from django.core import serializers
 
 from .serializers import RedditV1Serializer
 
-from rest_framework import serializers, views, response
-from rest_framework import authentication, permissions
+from rest_framework import views, response, authentication
+
 
 import redis
 import json
