@@ -25,11 +25,16 @@ while True :
         redis_client.set(job_name , 'searching')
         search_params = json.loads(redis_client.hget('filtered_job_details' , job_name))
 
+        print('received search params...')
         search_string = search_params['search_string']
         permalinks_to_search = search_params['permalinks']
 
+        print('Creating Target Embeddings...')
         target_embeddings = embeddings[[permalinks.index(pl) for pl in permalinks_to_search]]
+        print('target embedding shape : ' , target_embeddings.shape)
+
         query_embedding = model.encode(search_string)
+        print('Creating query embedding : ' , query_embedding.shape)
 
         batch_size = 5000
         cosine_similarity = [] 
@@ -45,6 +50,8 @@ while True :
                 cosine_similarity += util.cos_sim(query_embedding , target_embeddings[start:end , :])[0]
 
         cosine_similarity = sorted(list(zip(permalinks_to_search , cosine_similarity)) , key=lambda x : x[1] , reverse=True)
+
+        print(cosine_similarity[:10])
 
         redis_client.lpush('searched', job_name)
         redis_client.set(job_name , 'searched')
