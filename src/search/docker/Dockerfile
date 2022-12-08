@@ -1,4 +1,5 @@
-FROM pytorch/pytorch:1.8.1-cuda11.0-cudnn8-runtime
+FROM huggingface/transformers-pytorch-cpu:latest
+
 
 RUN apt-get update && apt-get install -y \
     wget
