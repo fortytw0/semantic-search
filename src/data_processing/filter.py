@@ -20,7 +20,7 @@ while True :
         search_params = json.loads(redis_client.hget('queued_job_details' , job_name))
         print('Search Params : ' , search_params)
 
-        subreddits = search_params['subreddits']
+        subreddits = search_params['subreddits'].split(',')
         filter_keywords = search_params['filter_keywords'].split(',')
 
         print('Filtering on keywords...')
@@ -39,6 +39,7 @@ while True :
         print('Extracitng permalinks')
         permalinks = list(result.select('permalink').toPandas()['permalink'])
         print('Number of permalinks : ' , len(permalinks))
+        print('Permalinks : ' , permalinks) 
 
         redis_client.lpush('filtered', job_name)
         redis_client.hset('filtered_job_details' , job_name , json.dumps(permalinks))

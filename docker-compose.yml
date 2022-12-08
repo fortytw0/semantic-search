@@ -14,16 +14,7 @@ services:
   redis:
     image: redis
 
-  data-processing : 
-    build:
-      context: ./src/data_processing/docker
-      dockerfile: Dockerfile
-    
-    volumes:
-      - ./src/data_processing/:/job
-      - ./data:/job/data
 
-    entrypoint: ["/bin/bash"]
     
 
 

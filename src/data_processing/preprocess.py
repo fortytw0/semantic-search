@@ -13,8 +13,6 @@ reddit_df = spark.read.json(data_files)
 
 reddit_df = reddit_df.withColumn('body_lowercase' , F.lower(F.col("body")))
 
-reddit_df = reddit_df.rdd.zipWithIndex().toDF()
 
-reddit_df=reddit_df.select(F.col("_1.*") , F.col("_2").alias('index'))
 
 reddit_df.write.json(data_files+'_PROCESSED')
