@@ -35,7 +35,16 @@ while True :
         permalinks_to_search = search_params['permalinks']
 
         print('Creating Target Embeddings...')
-        target_embeddings = embeddings[[permalinks.index(pl) for pl in permalinks_to_search]]
+
+        indices = []
+        for pl in permalinks_to_search : 
+            try : 
+                indices.append(permalinks.index(pl))
+            except : 
+                print('Could not find permalink for : ' , pl)
+
+
+        target_embeddings = embeddings[indices]
         print('target embedding shape : ' , target_embeddings.shape)
 
         query_embedding = model.encode(search_string)
