@@ -19,7 +19,7 @@ with open('./permalinks/RC_2022-06_permalink', 'r') as f:
 
 permalinks = [pl.strip() for pl in permalinks]
 
-print('permalinks:' , permalinks)
+# print('permalinks:' , permalinks)
 
 while True : 
 
@@ -33,15 +33,17 @@ while True :
         print('received search params...')
         search_string = search_params['search_string']
         permalinks_to_search = search_params['permalinks']
-
+        valid_permalinks = []
         print('Creating Target Embeddings...')
 
         indices = []
         for pl in permalinks_to_search : 
             try : 
-                indices.append(permalinks.index(pl))
+                indices.append(permalinks.index(pl)) 
+                valid_permalinks.append(pl)
             except : 
-                print('Could not find permalink for : ' , pl)
+                print('Could not find permalink for : ' , pl.encode("ascii" , "ignore"))
+
 
 
         target_embeddings = embeddings[indices]
@@ -53,17 +55,19 @@ while True :
         batch_size = 5000
         cosine_similarity = [] 
 
-        for i in range(0, query_embedding.shape[0] , batch_size):
-            if query_embedding.shape[0] - i < batch_size:
+        for i in range(0, target_embeddings.shape[0] , batch_size):
+            if target_embeddings.shape[0] - i < batch_size:
                 start = i 
-                end = abs(i-query_embedding.shape[0]) + i 
+                end = abs(i-target_embeddings.shape[0]) + i 
             else:
                 start = i 
                 end = i + batch_size
+            print('Cos SIM') 
+            print(util.cos_sim(query_embedding , target_embeddings[start:end , :]))
 
-                cosine_similarity += util.cos_sim(query_embedding , target_embeddings[start:end , :])[0]
-
-        cosine_similarity = sorted(list(zip(permalinks_to_search , cosine_similarity)) , key=lambda x : x[1] , reverse=True)
+            cosine_similarity.extend(util.cos_sim(query_embedding , target_embeddings[start:end , :])[0].tolist())
+        print('cosine-similarity' , cosine_similarity)
+        cosine_similarity = sorted(list(zip(valid_permalinks , cosine_similarity)) , key=lambda x : x[1] , reverse=True)
 
         print(cosine_similarity[:10])
 

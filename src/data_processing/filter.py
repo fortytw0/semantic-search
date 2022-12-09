@@ -49,13 +49,18 @@ def get_top_k_comments(permalink_cosine_similarities , k=100) :
     permalinks = []
     cosine_similarities  = []
 
+    if len(permalink_cosine_similarities) < k : 
+        k = len(permalink_cosine_similarities)
+
     for i in range(k) : 
-        permalink , cosine_similarity = permalink_cosine_similarities[0] , permalink_cosine_similarities[1]
+        permalink , cosine_similarity = permalink_cosine_similarities[i][0] , permalink_cosine_similarities[i][1]
         permalinks.append(permalink)
         cosine_similarities.append(cosine_similarity)
+        print(permalinks)
 
     processed_df = filter_on_permalink(permalinks)
-    processed_df = processed_df.withColumn('cosine_similarity' , cosine_similarities)
+    processed_df = processed_df.toPandas() 
+    processed_df['cosine_similarity'] = cosine_similarities
 
     return processed_df
 
@@ -114,7 +119,7 @@ while True :
             print('Got the following search result : ' , search_results)
 
             processed_df = get_top_k_comments(search_results)
-            results = processed_df.rdd.map(lambda row: row.asDict()).collect()
+            results = processed_df.to_dict('records')
 
             print('collated search results : ' , results)
 

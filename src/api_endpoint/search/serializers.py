@@ -4,7 +4,7 @@ class RedditV1Serializer(serializers.Serializer) :
 
     search_string = serializers.CharField()
     subreddits = serializers.CharField(allow_blank=False, trim_whitespace=True)
-    filter_keywords = serializers.CharField() 
+    filter_keywords = serializers.CharField(required=False) 
     description = serializers.CharField()
 
 
