@@ -23,7 +23,7 @@ services:
       - ./data/embeddings:/search/embeddings
       - ./data/permalinks:/search/permalinks
 
-    command: ["tail", "-f", "/dev/null"]
+    command: ["python3 searcher.py"]
 
   data-processing:
     build: 
