@@ -1,5 +1,6 @@
 import requests
 from urllib import parse
+import time
 
 URL = 'http://198.59.83.83/'
 
@@ -55,29 +56,57 @@ def list_my_jobs(token) :
 
     return requests.get(parse.urljoin(URL , endpoint) , headers={'Authorization' : 'Token {}'.format(token)})
 
+def get_job_status(token, job_name) : 
 
-username = 'lala'
-password = 'kaka1234'
-email = 'zw@123.com'
+    endpoint = 'search/reddit/v1/status/{}/'.format(job_name)
+    return requests.get(parse.urljoin(URL , endpoint) , headers={'Authorization' : 'Token {}'.format(token)})
 
-# response = create_account(username, password, email)
+def get_finished_results(token) : 
 
-# print(response.content)
-# print(response.status_code)
+    endpoint = 'search/reddit/v1/finished/'
+    return requests.get(parse.urljoin(URL , endpoint) , headers={'Authorization' : 'Token {}'.format(token)})
+
+
+print('Hello! This is a demo for our Reddit Semantic Search framework!')
+
+username = 'mycoolusername'
+password = 'mycoolpassword1234'
+email = 'mycoolemail@123.com'
+
+time.sleep(3)
+
+print('We begin by creating an account...')
+
+print('Credentials are : ')
+print('Username : ' , username)
+print('Password : ' , password)
+print('Email : ' , email)
+
+response = create_account(username, password, email)
+
+print('Json Response after account creation request: ' , response.json())
+print('We have been successfully able to create an account...')
+
+time.sleep(3)
+
+print('Now we are going to login using our new credentials.')
 
 response = login(username, password)
 
-print(response.content)
-print(response.status_code)
-print(response.json())
-
 token = response.json()['auth_token']
 
-response = hello_world(token)
+print('We have received the token {} as a response of our login request. Please keep it secret.'.format(token))
 
-print(response.content)
-print(response.status_code)
-print(response.json())
+time.sleep(3)
+
+print('Now we are going to send a search query to the server...')
+
+print('The details of our request are given below : ')
+
+print("search_string = 'I think Messi is way better than Ronaldo'")
+print("subreddits = 'soccer'")
+print("filter_keywords = ''")
+print("description = 'I have an incredibly parochial view on soccer'")
 
 search_string = 'I think Messi is way better than Ronaldo'
 subreddits = 'soccer'
@@ -86,11 +115,14 @@ description = 'I have an incredibly parochial view on soccer'
 
 response = reddit_search(token , search_string, subreddits , filter_keywords , description)
 
-print(response.content)
-print(response.status_code)
+print('The response to our search request is : ')
 print(response.json())
 
+time.sleep(3)
+print('Listing all my jobs : ')
 response = list_my_jobs(token)
 
-print(response.content)
-print(response.status_code)
+print('Response to our request is : ')
+print(response.json())
+
+
