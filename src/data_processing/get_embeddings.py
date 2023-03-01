@@ -8,8 +8,8 @@ import os
 #---- User Config ----#
 
 model_name = 'all-mpnet-base-v2'
-reddit_data_dir = '/content/RC_2022-06'
-reddit_embedding_dir = ''
+reddit_data_dir = '/scratch/alpine/abha4861/dj/grepped/RC_2017-01'
+reddit_embedding_dir = '/scratch/alpine/dasr8731/semantic-search/data'
 num_files = 1
 samples_per_file = -1 # -1 for all samples in a file 
 batch_size = 128
