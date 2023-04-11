@@ -171,7 +171,7 @@ The design pattern here is you check the job status every 1 second or so, and th
 
 ### Get Finished Jobs 
 
-`Route = search/reddit/v1/finished/`
+`Route = search/reddit/v1/finished/<job_name>/`
 
 
 Expected Package : 
